@@ -14,7 +14,7 @@ public:
             container = new T[size];
         }
         catch (const std::bad_alloc& e) {
-            std::cout << "ERROR! A very big size!";
+            std::cout << "ERROR! A very big size!" << e.what();
         }
     }
 
@@ -65,17 +65,28 @@ public:
 
 
 int main() {
-    Stack<int> stack(50);
+    int size = 30;
+    Stack<int> stack_1(size);
 
-    std::cout << "Stack is empty: " << stack.empty() << std::endl;
+    std::cout << "Stack is empty: " << stack_1.empty() << std::endl;
 
-    for (int i = 13; i <= 31; i++)
-        stack.push(i);
+    for (int i = 13; i < 31; i++)
+        stack_1.push(i);
+    std::cout << "Stack is empty: " << stack_1.size() << std::endl;
+    std::cout << "Stack is empty: " << stack_1.empty() << std::endl;
+    std::cout << "Top element: "; stack_1.top();
+    stack_1.pop();
+    std::cout << "Stack size: " << stack_1.size() << std::endl;
 
-    std::cout << "Stack is empty: " << stack.empty() << std::endl;
-    std::cout << "Stack size: " << stack.size() << std::endl;
+    //size = 99999999999999999999;
+    //Stack<int> stack_2(size);
 
-    stack.top();
+    Stack<int> stack_3(20);
+    Stack<int> stack_4(0);
 
-    std::cout << "First element from stack: " << stack.pop() << std::endl;
+    //for (int i = 0; i < 22; i++)
+    //    stack_3.push(i);
+
+    //stack_4.pop();
+    //stack_4.top();
 }
