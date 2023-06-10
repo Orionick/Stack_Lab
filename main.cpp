@@ -9,13 +9,7 @@ private:
 public:
     Stack(unsigned int size) {
         m_ElementsCountMax = size;
-
-        try {
-            container = new T[size];
-        }
-        catch (const std::bad_alloc& e) {
-            std::cout << "ERROR! A very big size!" << e.what();
-        }
+        container = new T[size];
     }
 
     ~Stack() {
@@ -65,28 +59,34 @@ public:
 
 
 int main() {
-    int size = 30;
-    Stack<int> stack_1(size);
+    unsigned int size;
+    std::cin >> size;
+    try {
+        Stack<int> stack(size);
 
-    std::cout << "Stack is empty: " << stack_1.empty() << std::endl;
+        std::cout << "Size: " << stack.size() << std::endl;
+        std::cout << "Is empty: " << (stack.empty() ? "Yes" : "No") << std::endl;
 
-    for (int i = 13; i < 31; i++)
-        stack_1.push(i);
-    std::cout << "Stack is empty: " << stack_1.size() << std::endl;
-    std::cout << "Stack is empty: " << stack_1.empty() << std::endl;
-    std::cout << "Top element: "; stack_1.top();
-    stack_1.pop();
-    std::cout << "Stack size: " << stack_1.size() << std::endl;
+        for (int i = 1; i <= 3; i++)
+            stack.push(i);
+        std::cout << "Size after push: " << stack.size() << std::endl;
+        std::cout << "Top number: "; stack.top();
+        std::cout << "Is empty: " << (stack.empty() ? "Yes" : "No") << std::endl;
 
-    //size = 99999999999999999999;
-    //Stack<int> stack_2(size);
-
-    Stack<int> stack_3(20);
-    Stack<int> stack_4(0);
-
-    //for (int i = 0; i < 22; i++)
-    //    stack_3.push(i);
-
-    //stack_4.pop();
-    //stack_4.top();
+        stack.pop();
+        std::cout << "Size after pop(): " << stack.size() << std::endl;
+        std::cout << "Top number: "; stack.top();
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Too big number!\n" << e.what() << std::endl;
+    }
+    catch (const std::overflow_error& e) {
+        std::cerr << e.what() << std::endl;
+    }
+    catch (const std::out_of_range& e) {
+        std::cerr << e.what() << std::endl;
+    }
+    catch (const std::logic_error& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
